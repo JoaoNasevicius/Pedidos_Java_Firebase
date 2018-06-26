@@ -22,7 +22,7 @@ public class deletaProdutoController {
 
     @FXML  TextField productName;
     String userName = "";
-    private void deletaProduto(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
+    public void deletaProduto(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
     	acesso meuBD = new acesso();
     	
     	

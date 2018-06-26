@@ -33,6 +33,6 @@
       <TextField fx:id="restauranteName" layoutX="224.0" layoutY="328.0" prefHeight="24.0" prefWidth="603.0" />
       <Button layoutX="220.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleGoToMenu" prefHeight="65.0" prefWidth="603.0" style="-fx-background-color: #3232600; -fx-background-radius: 10;" text="Login" textAlignment="CENTER" />
       <PasswordField fx:id="senhaUsuario" layoutX="220.0" layoutY="394.0" prefHeight="24.0" prefWidth="603.0" />
-      <Text layoutX="224.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faltou digitar usuario ou senha" />
+      <Text fill="#f2f0f0" layoutX="224.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faltou digitar usuario ou senha" />
    </children>
 </AnchorPane>

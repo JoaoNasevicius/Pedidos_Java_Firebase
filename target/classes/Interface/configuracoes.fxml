@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.ConfiguracoesController">
+    <children>
+        <Separator layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="965.0" />
+        <Separator layoutX="128.0" orientation="VERTICAL" prefHeight="686.0" prefWidth="64.0" />
+        <Separator layoutX="831.0" layoutY="1.0" orientation="VERTICAL" prefHeight="686.0" prefWidth="64.0" />
+        <Text layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bolado" textAlignment="CENTER" wrappingWidth="157.7294921875">
+            <font>
+                <Font size="43.0" />
+            </font>
+        </Text>
+        <Pane layoutY="111.0" prefHeight="575.0" prefWidth="158.0">
+            <children>
+                <Label layoutX="7.0" layoutY="14.0" prefHeight="16.0" prefWidth="145.0" text="Navegaçao">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <Button layoutX="14.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGoPedidos" prefHeight="26.0" prefWidth="130.0" text="Menu" />
+                <Button layoutX="14.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleGoPedidos" prefHeight="26.0" prefWidth="130.0" text="Pedidos" />
+                <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #f11123;" text="Configuraçoes" />
+                <Button layoutX="28.0" layoutY="535.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Sair" />
+            </children>
+        </Pane>
+        <Label layoutX="192.0" layoutY="36.0" prefHeight="71.0" prefWidth="437.0" text="Configuraçoes">
+            <font>
+                <Font size="58.0" />
+            </font>
+        </Label>
+        <ListView layoutX="158.0" layoutY="111.0" prefHeight="575.0" prefWidth="704.0" />
+      <Text layoutX="192.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Restaurante">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField />
+      <TextField fx:id="nomeCadastrado" layoutX="537.0" layoutY="161.0" prefHeight="26.0" prefWidth="301.0" />
+      <Text layoutX="192.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField fx:id="emailCadastrado" layoutX="537.0" layoutY="233.0" prefHeight="26.0" prefWidth="301.0" />
+      <Text layoutX="192.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo de Comida">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tipoComidaCadastrado" layoutX="537.0" layoutY="310.0" prefHeight="26.0" prefWidth="301.0" />
+      <Text layoutX="192.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cor">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField fx:id="corCadastrada" layoutX="537.0" layoutY="386.0" prefHeight="26.0" prefWidth="301.0" />
+      <Text layoutX="192.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <PasswordField fx:id="senhaCadastrada" layoutX="537.0" layoutY="458.0" prefHeight="26.0" prefWidth="301.0" />
+      <Button layoutX="776.0" layoutY="608.0" mnemonicParsing="false" text="Atualiza Dados" />
+    </children>
+</AnchorPane>
