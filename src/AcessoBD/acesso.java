@@ -21,6 +21,7 @@ public class acesso {
 	}
 	
 	public static void criaMenu(String restaurante) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
+		dataMap1 = new LinkedHashMap<String, Object>();
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
 		dataMap4 =  new LinkedHashMap<String, Object>();
@@ -45,7 +46,7 @@ public class acesso {
 	public static void insereItem(String restaurante, String nome, String descricao, double preco) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		String verificacao_loja = null, verificacao_item;
 		int i = 0;
-		dataMap0 =  new LinkedHashMap<String, Object>();
+		dataMap1 = new LinkedHashMap<String, Object>();
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
 		dataMap4 =  new LinkedHashMap<String, Object>();
@@ -85,6 +86,10 @@ public class acesso {
 		String verificacao_loja = null, verificacao_item = null;
 		int i = 0, int_aux;
 		Map map_aux = new LinkedHashMap<String, Object>();
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 		
 		response = firebase.get();
 		dataMap0 = response.getBody();
@@ -125,6 +130,10 @@ public class acesso {
 		String verificacao_loja = null, verificacao_item = null;
 		int i = 0, int_aux;
 		Map map_aux = new LinkedHashMap<String, Object>();
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 		
 		response = firebase.get();
 		dataMap0 = response.getBody();
@@ -168,7 +177,9 @@ public class acesso {
 	
 	public static void criarCadastro(String restaurante,String senha,String descricao,String email, String cor) throws UnsupportedEncodingException, JacksonUtilityException, FirebaseException {
 		dataMap1 = new LinkedHashMap<String, Object>();
-		dataMap2 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 		
 		response = firebase.get();
 		dataMap0 = response.getBody();
@@ -185,6 +196,10 @@ public class acesso {
 	}
 	
 	public static int fazerLogin(String restaurante, String senha) throws UnsupportedEncodingException, FirebaseException {
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 		response = firebase.get();
 		dataMap0 = response.getBody();
 		dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
@@ -203,6 +218,10 @@ public class acesso {
 	public static Map<String, Object> retornarMenu(String restaurante) throws UnsupportedEncodingException, FirebaseException{
 		int i = 0;
 		String verificacao_loja;
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 		
 		response = firebase.get();
 		dataMap0 = response.getBody();
