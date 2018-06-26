@@ -16,25 +16,29 @@ public class acesso {
 	static Map<String, Object> dataMap3 = new LinkedHashMap<String, Object>();
 	static Map<String, Object> dataMap4 = new LinkedHashMap<String, Object>();
 	
-	static String restaurante= "Starbucks";
+	public static void criaMenu(String restaurante) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
 	
-	public static void criaMenu(String cor) {
-		dataMap0 = null;
-		dataMap1 = null;
-		dataMap2 = null;
-		dataMap3 = null;
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
+		dataMap4 = (Map<String,Object>) dataMap1.get(restaurante);
 		
 		dataMap3.put("Tamanho", 0);
 		dataMap2.put("Cardapio", dataMap3);
-		dataMap2.put("Cor", cor);
+		dataMap2.put("Cor", (String) dataMap4.get("Cor"));
+		dataMap1 =  (Map<String, Object>) dataMap0.get("Lojas");
 		dataMap2.put("Nome", restaurante);
 		dataMap1.put("Loja" + (Integer) dataMap1.get("Tamanho"), dataMap2);
 		dataMap1.put("Tamanho", (Integer) dataMap1.get("Tamanho") + 1);
-		dataMap0.put("Lojas", dataMap0);
-		
+		dataMap0.put("Lojas", dataMap1);
+	
+		firebase.put(dataMap0);
 	}
 	
-	public static void insereItem(String nome, String descricao, double preco) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
+	public static void insereItem(String restaurante, String nome, String descricao, double preco) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		String verificacao_loja = null, verificacao_item;
 		int i = 0;
 		
@@ -69,7 +73,7 @@ public class acesso {
 		firebase.put(dataMap0);
 	}
 	
-	public static void atualizaItem(String nome, String descricao, double preco) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
+	public static void atualizaItem(String restaurante, String nome, String descricao, double preco) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		String verificacao_loja = null, verificacao_item = null;
 		int i = 0, int_aux;
 		Map map_aux = new LinkedHashMap<String, Object>();
@@ -109,7 +113,7 @@ public class acesso {
 		
 	}
 	
-	public static void removeItem(String nome) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
+	public static void removeItem(String restaurante, String nome) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		String verificacao_loja = null, verificacao_item = null;
 		int i = 0, int_aux;
 		Map map_aux = new LinkedHashMap<String, Object>();
@@ -154,26 +158,36 @@ public class acesso {
 		firebase.put(dataMap0);
 	}
 	
-	public static void criarCadastro(String nome,String senha,String descricao,String email, String cor) {
-		dataMap0 = null;
-		dataMap1 = null;
-		dataMap2 = null;
-
+	public static void criarCadastro(String restaurante,String senha,String descricao,String email, String cor) throws UnsupportedEncodingException, JacksonUtilityException, FirebaseException {
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 = new LinkedHashMap<String, Object>();
+		
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		
 		dataMap2.put("Senha", senha);
 		dataMap2.put("Descricao", descricao);
 		dataMap2.put("Email", email);
 		dataMap2.put("Cor", cor);
 		dataMap1.put(restaurante, dataMap2);
-		dataMap0.put(Restaurantes, dataMap0);
+		dataMap0.put("Restaurantes", dataMap1);
+		
+		firebase.put(dataMap0);
 	}
 	
-	public static void main(String args[]) throws FirebaseException, UnsupportedEncodingException, JacksonUtilityException{
-		firebase = new Firebase("https://projetoteste-9d563.firebaseio.com/");
-
-//		insereItem("Remocao feita", "Muito Bom", 0.3);
-//		insereItem("Esse cu peludo", "Legal", 1023.23);
-//		removeItem("Cha de boldo 2");
+	public static void fazerLogin(String restaurante, String nome, String senha) throws UnsupportedEncodingException, FirebaseException {
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
 		
-		atualizaItem("Esse cu peludo", "Nao tao peludo", 10.3);
+		if(dataMap1.containsKey(nome) == false)
+			return;
+		
+		dataMap2 = (Map<String, Object>) dataMap1.get(nome);
+
+		if(dataMap2.get("Senha").equals(senha) == false)
+			return;
+		
+		return;
 	}
 }
