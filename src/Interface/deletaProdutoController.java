@@ -8,16 +8,43 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+
+import AcessoBD.acesso;
+import Firebase.FirebaseException;
+import Firebase.JacksonUtilityException;
 
 public class deletaProdutoController {
 
 
-
     @FXML  TextField productName;
+    String userName = "";
+    private void deletaProduto(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
+    	acesso meuBD = new acesso();
+    	
+    	
+    	//acessa restaurante nome
+    	System.out.println("Atualizando Menu");
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("userInfo.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
-    private void deletaProduto(javafx.event.ActionEvent event) throws IOException {
+        try{
+             userName = br.readLine();
 
+        } finally {
+            br.close();
+        }
+    	meuBD.removeItem(userName, productName.getText());
+    	
+    	
+    	
         System.out.println("Produto deletao, " + productName.getText());
 
         System.out.println("Go to pedidos");

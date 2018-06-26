@@ -14,6 +14,6 @@
                 <Font size="30.0" />
             </font>
         </Label>
-        <Button layoutX="236.0" layoutY="250.0" mnemonicParsing="false"  prefHeight="52.0" prefWidth="129.0" text="Deleta Produto" />
+        <Button layoutX="236.0" layoutY="250.0" mnemonicParsing="false"  prefHeight="52.0" prefWidth="129.0" text="Deleta Produto" onAction="#deletaProduto"/>
     </children>
 </AnchorPane>
