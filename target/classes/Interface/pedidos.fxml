@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.pedidosController">
+   <children>
+      <Separator layoutX="14.0" layoutY="97.0" prefHeight="27.0" prefWidth="965.0" />
+      <Separator layoutX="128.0" orientation="VERTICAL" prefHeight="686.0" prefWidth="64.0" />
+      <Separator layoutX="831.0" layoutY="1.0" orientation="VERTICAL" prefHeight="686.0" prefWidth="64.0" />
+      <Text layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bolado" textAlignment="CENTER" wrappingWidth="157.7294921875">
+         <font>
+            <Font size="43.0" />
+         </font>
+      </Text>
+      <Pane layoutY="111.0" prefHeight="575.0" prefWidth="158.0">
+         <children>
+            <Label layoutX="7.0" layoutY="14.0" prefHeight="16.0" prefWidth="145.0" text="Navegaçao">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button layoutX="14.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleGoToMenu" prefHeight="26.0" prefWidth="130.0" text="Menu" />
+            <Button layoutX="14.0" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #f11123;" text="Pedidos" />
+            <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Configuraçoes" />
+            <Button layoutX="14.0" layoutY="535.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Sair" />
+         </children>
+      </Pane>
+      <Label layoutX="192.0" layoutY="36.0" prefHeight="16.0" prefWidth="386.0" text="Pedidos">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Label>
+      <ListView fx:id="pedidosListas" layoutX="160.0" layoutY="147.0" prefHeight="539.0" prefWidth="703.0" />
+      <Button layoutX="657.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleAtualizaPedidos" prefHeight="26.0" prefWidth="168.0" text="Atualizar Pedidos" />
+      <Text layoutX="169.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produto">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text layoutX="315.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text layoutX="499.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comprador">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+      <Text layoutX="696.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mesa">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
