@@ -16,6 +16,10 @@ public class acesso {
 	static Map<String, Object> dataMap3 = new LinkedHashMap<String, Object>();
 	static Map<String, Object> dataMap4 = new LinkedHashMap<String, Object>();
 	
+	public acesso(String restaurante) throws FirebaseException {
+		firebase = new Firebase("https://projetoteste-9d563.firebaseio.com/");
+	}
+	
 	public static void criaMenu(String restaurante) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
@@ -175,19 +179,19 @@ public class acesso {
 		firebase.put(dataMap0);
 	}
 	
-	public static void fazerLogin(String restaurante, String nome, String senha) throws UnsupportedEncodingException, FirebaseException {
+	public static int fazerLogin(String restaurante, String senha) throws UnsupportedEncodingException, FirebaseException {
 		response = firebase.get();
 		dataMap0 = response.getBody();
 		dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
 		
-		if(dataMap1.containsKey(nome) == false)
-			return;
+		if(dataMap1.containsKey(restaurante) == false)
+			return 1;
 		
-		dataMap2 = (Map<String, Object>) dataMap1.get(nome);
+		dataMap2 = (Map<String, Object>) dataMap1.get(restaurante);
 
 		if(dataMap2.get("Senha").equals(senha) == false)
-			return;
+			return 2;
 		
-		return;
+		return 0;
 	}
 }
