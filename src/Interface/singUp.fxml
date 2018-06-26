@@ -18,7 +18,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="153.0" layoutY="232.0" prefHeight="16.0" prefWidth="210.0" text="User">
+      <Label layoutX="153.0" layoutY="232.0" prefHeight="16.0" prefWidth="210.0" text="Email">
          <font>
             <Font size="19.0" />
          </font>
@@ -37,7 +37,7 @@
       <TextField fx:id="userName" layoutX="153.0" layoutY="271.0" prefHeight="26.0" prefWidth="358.0" />
       <TextField fx:id="shoppingLocalizacao" layoutX="153.0" layoutY="343.0" prefHeight="26.0" prefWidth="358.0" />
       <TextField fx:id="senhaRestaurante" layoutX="153.0" layoutY="421.0" prefHeight="26.0" prefWidth="358.0" />
-      <Button layoutX="153.0" layoutY="632.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Sign Up" />
+      <Button layoutX="153.0" layoutY="632.0" mnemonicParsing="false" onAction="#hangleGoMenu" prefHeight="26.0" prefWidth="121.0" text="Sign Up" />
       <Button layoutX="390.0" layoutY="632.0" mnemonicParsing="false" onAction="#handleGoToLogin" prefHeight="26.0" prefWidth="121.0" text="Back to login" />
       <Label layoutX="153.0" layoutY="463.0" prefHeight="16.0" prefWidth="210.0" text="Descriçao">
          <font>

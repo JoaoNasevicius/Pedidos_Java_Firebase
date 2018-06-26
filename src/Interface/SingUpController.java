@@ -1,5 +1,8 @@
 package Interface;
 
+import AcessoBD.acesso;
+import Firebase.FirebaseException;
+import Firebase.JacksonUtilityException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,11 +14,21 @@ import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class SingUpController {
 
 
+    acesso meuBD;
+
+    {
+        try {
+            meuBD = new acesso();
+        } catch (FirebaseException e) {
+            e.printStackTrace();
+        }
+    }
 
     private File logo;
 
@@ -25,7 +38,6 @@ public class SingUpController {
     @FXML private TextField shoppingLocalizacao;
     @FXML private TextField senhaRestaurante;
     @FXML private TextField dadosRestaurante;
-
 
     public void handleGoToLogin(javafx.event.ActionEvent event) throws IOException {
         System.out.println("Go to Login");
@@ -37,15 +49,27 @@ public class SingUpController {
         app_stage.show();
     }
 
-    public void hangleGoMenu(javafx.event.ActionEvent event) throws IOException{
+    public void hangleGoMenu(javafx.event.ActionEvent event) throws IOException, JacksonUtilityException, FirebaseException {
         System.out.println("Novo usuario cadastrado");
 
 
         //pega informações de cadastro
-        String usuario = userName.getText();
+        String nome = nomeRestaurante.getText();
+        String email = userName.getText();
         String praca = shoppingLocalizacao.getText();
         String senha = senhaRestaurante.getText();
         String[] dados = dadosRestaurante.getText().split(",");
+
+
+        meuBD.criarCadastro(nome, senha, dados[0], email, dados[1]);
+        meuBD.criaMenu(nome);
+
+        //salva nome restaurante
+        File file = new File("userInfo.txt");
+        FileWriter W = new FileWriter(file);
+        W.write(nome);
+        W.close();
+
 
 
         Parent loginPage = FXMLLoader.load(getClass().getResource("pedidos.fxml"));

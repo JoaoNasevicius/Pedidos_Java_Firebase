@@ -1,5 +1,7 @@
 package Interface;
 
+import AcessoBD.acesso;
+import Firebase.FirebaseException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -19,12 +22,16 @@ import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
 
-
+    acesso meuBd = new acesso();
 
     @FXML TextField restauranteName;
     @FXML PasswordField senhaUsuario;
 
+    public LogInController() throws FirebaseException {
+    }
 
+
+    @Override
     public void initialize(URL url, ResourceBundle rb){
 
     }
@@ -42,41 +49,44 @@ public class LogInController implements Initializable {
     }
 
 
-    public void handleGoToMenu(javafx.event.ActionEvent event) throws IOException {
+    public void handleGoToMenu(javafx.event.ActionEvent event) throws IOException, FirebaseException {
 
 
 
         String senha = this.senhaUsuario.getText();
         String login = this.restauranteName.getText();
 
-
         if(!senha.equals("") && !login.equals("")){
 
-            if(true){//chava função para chegar dados no banco de dados
+            if(meuBd.fazerLogin(login, senha) != 1){//chava função para chegar dados no banco de dados
 
-                File file = new File("../userInfo.txt");
-                FileWriter W = new FileWriter(file);
-                W.write(login);
-                W.close();
+                if (meuBd.fazerLogin(login, senha) == 0){
 
-                System.out.println("Go to Menu");
-                Parent loginPage = FXMLLoader.load(getClass().getResource("pedidos.fxml"));
-                Scene loginScene = new Scene(loginPage);
-                Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                app_stage.hide();
-                app_stage.setScene(loginScene);
-                app_stage.show();
+                    File file = new File("userInfo.txt");
+                    FileWriter W = new FileWriter(file);
+                    W.write(login);
+                    W.close();
+
+                    System.out.println("Go to Menu");
+                    Parent loginPage = FXMLLoader.load(getClass().getResource("pedidos.fxml"));
+                    Scene loginScene = new Scene(loginPage);
+                    Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    app_stage.hide();
+                    app_stage.setScene(loginScene);
+                    app_stage.show();
+
+                }else{
+                    System.out.println(senha);
+                    System.out.println("Senha errada");
+                }
 
             }else{//usuario não cadastrado no banco, retorna erro
 
-
+                System.out.println("Usuaria não cadastrado no sistema");
             }
         }else{ //se falto digitar senha ou login da mensagem de erro
-            Stage erroScrean = new Stage();
-            Parent newPage = FXMLLoader.load(getClass().getResource("paginasDeErro/erroLogin"));
-            erroScrean.setTitle("Hello World");
-            erroScrean.setScene(new Scene(newPage, 997, 686));
-            erroScrean.show();
+
+            System.out.println("Falta digitar usuario ou senha");
         }
 
 
