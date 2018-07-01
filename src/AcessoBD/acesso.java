@@ -164,9 +164,11 @@ public class acesso {
 			dataMap3.put(Integer.toString(j), dataMap3.get(verificacao_item));
 			dataMap3.remove(verificacao_item);
 		}
-
-		dataMap3.put("Tamanho", (Integer) dataMap3.get("Tamanho") - 1);
-		dataMap3.remove((String)dataMap3.get("Tamanho"));
+		int_aux = (Integer) dataMap3.get("Tamanho");
+		int_aux--;
+		
+		dataMap3.put("Tamanho", int_aux);
+		dataMap3.remove(Integer.toString((Integer)dataMap3.get("Tamanho")));
 
 		dataMap2.put("Cardapio", dataMap3);
 		dataMap1.put(verificacao_loja, dataMap2);
@@ -183,7 +185,9 @@ public class acesso {
 		
 		response = firebase.get();
 		dataMap0 = response.getBody();
-		dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
+		
+		if(dataMap0.containsKey("Restaurantes") == true) 
+			dataMap1 = (Map<String, Object>) dataMap0.get("Restaurantes");
 		
 		dataMap2.put("Senha", senha);
 		dataMap2.put("Descricao", descricao);
@@ -192,7 +196,8 @@ public class acesso {
 		dataMap1.put(restaurante, dataMap2);
 		dataMap0.put("Restaurantes", dataMap1);
 		
-		firebase.put(dataMap0);
+		firebase.put(dataMap0);	
+	
 	}
 	
 	public static int fazerLogin(String restaurante, String senha) throws UnsupportedEncodingException, FirebaseException {
@@ -235,6 +240,90 @@ public class acesso {
 				break;
 		}
 		
-		return dataMap2;
+		return (Map <String, Object>)dataMap2.get("Cardapio");
+	}
+	
+	public static Map<String, Object> retornarPedidos(String restaurante) throws UnsupportedEncodingException, FirebaseException{
+		int i = 0;
+		String verificacao_loja;
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
+		
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		
+		dataMap1 = (Map<String, Object>) dataMap0.get("Lojas");
+		
+		while(i != (Integer) dataMap1.get("Tamanho")){
+			verificacao_loja = Integer.toString(i);
+			dataMap2 = (Map<String, Object>) dataMap1.get(verificacao_loja);
+			i++;
+			if( dataMap2.get("Nome").equals(restaurante) == true)
+				break;
+		}
+		
+		dataMap3 = (Map<String, Object>) dataMap2.get("Pedidos");
+		
+		
+		return dataMap3;
+	}
+	
+	public static void pedidoPronto(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException {
+		int i = 0;
+		String verificacao_loja = null;
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
+		
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		
+		dataMap1 = (Map<String, Object>) dataMap0.get("Lojas");
+		
+		while(i != (Integer) dataMap1.get("Tamanho")){
+			verificacao_loja = Integer.toString(i);
+			dataMap2 = (Map<String, Object>) dataMap1.get(verificacao_loja);
+			i++;
+			if( dataMap2.get("Nome").equals(restaurante) == true)
+				break;
+		}
+		
+		dataMap3 = (Map<String, Object>) dataMap2.get("Pedidos");
+		dataMap4 = (Map<String, Object>) dataMap3.get(pedido);
+		dataMap4.put("Pronto", 1);
+		
+		dataMap3.put(pedido, dataMap4);
+		dataMap2.put("Pedidos", dataMap3);
+		dataMap1.put(verificacao_loja, dataMap2);
+		dataMap0.put("Lojas", dataMap1);
+		
+	}
+	
+	public static void pedidoRetirado(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException {
+		int i = 0;
+		String verificacao_loja;
+		dataMap1 = new LinkedHashMap<String, Object>();
+		dataMap2 =  new LinkedHashMap<String, Object>();
+		dataMap3 =  new LinkedHashMap<String, Object>();
+		dataMap4 =  new LinkedHashMap<String, Object>();
+		
+		response = firebase.get();
+		dataMap0 = response.getBody();
+		
+		dataMap1 = (Map<String, Object>) dataMap0.get("Lojas");
+		
+		while(i != (Integer) dataMap1.get("Tamanho")){
+			verificacao_loja = Integer.toString(i);
+			dataMap2 = (Map<String, Object>) dataMap1.get(verificacao_loja);
+			i++;
+			if( dataMap2.get("Nome").equals(restaurante) == true)
+				break;
+		}
+		
+		dataMap3 = (Map<String, Object>) dataMap2.get("Pedidos");
+		dataMap4.remove(pedido);
 	}
 }
