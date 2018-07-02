@@ -34,6 +34,7 @@ public class acesso {
 		dataMap3.put("Tamanho", 0);
 		dataMap2.put("Cardapio", dataMap3);
 		dataMap2.put("Cor", (String) dataMap4.get("Cor"));
+		dataMap2.put("URL", (String) dataMap4.get("URL"));
 		dataMap1 =  (Map<String, Object>) dataMap0.get("Lojas");
 		dataMap2.put("Nome", restaurante);
 		dataMap1.put( Integer.toString((Integer)dataMap1.get("Tamanho")), dataMap2);
@@ -271,9 +272,10 @@ public class acesso {
 		return dataMap3;
 	}
 	
-	public static void pedidoPronto(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException {
+	public static void pedidoPronto(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		int i = 0;
 		String verificacao_loja = null;
+		String verificacao_pedido = null;
 		dataMap1 = new LinkedHashMap<String, Object>();
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
@@ -293,19 +295,31 @@ public class acesso {
 		}
 		
 		dataMap3 = (Map<String, Object>) dataMap2.get("Pedidos");
-		dataMap4 = (Map<String, Object>) dataMap3.get(pedido);
+		
+		i = 0;
+		while(i != (Integer) dataMap3.get("Tamanho")){
+			verificacao_pedido = Integer.toString(i);
+			dataMap4 = (Map<String, Object>) dataMap3.get(verificacao_pedido);
+			if(dataMap4.get("Nome").equals(pedido) == true)
+				break;
+			i++;
+		}
+		
 		dataMap4.put("Pronto", 1);
 		
-		dataMap3.put(pedido, dataMap4);
+		dataMap3.put(verificacao_pedido, dataMap4);
 		dataMap2.put("Pedidos", dataMap3);
 		dataMap1.put(verificacao_loja, dataMap2);
 		dataMap0.put("Lojas", dataMap1);
 		
+		firebase.put(dataMap0);
 	}
 	
-	public static void pedidoRetirado(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException {
+	public static void pedidoRetirado(String restaurante, String pedido) throws UnsupportedEncodingException, FirebaseException, JacksonUtilityException {
 		int i = 0;
-		String verificacao_loja;
+		String verificacao_loja = null;
+		String verificacao_pedido = null;
+		int int_aux;
 		dataMap1 = new LinkedHashMap<String, Object>();
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
@@ -325,6 +339,30 @@ public class acesso {
 		}
 		
 		dataMap3 = (Map<String, Object>) dataMap2.get("Pedidos");
-		dataMap4.remove(pedido);
+		
+		i = 0;
+		while(i != (Integer) dataMap3.get("Tamanho")){
+			verificacao_pedido = Integer.toString(i);
+			dataMap4 = (Map<String, Object>) dataMap3.get(verificacao_pedido);
+			if(dataMap4.get("Nome").equals(pedido) == true)
+				break;
+			i++;
+		}
+		
+		for(int j = i; j < (Integer) dataMap3.get("Tamanho") - 1; j++) {
+			verificacao_pedido = Integer.toString(j);
+			int_aux= j + 1;
+			
+			dataMap3.put(verificacao_pedido, (Map<String,LinkedHashMap>) dataMap3.get(Integer.toString(int_aux)));
+		}
+		int_aux = (Integer) dataMap3.get("Tamanho") - 1;
+		dataMap3.put("Tamanho", int_aux);
+		dataMap3.remove(Integer.toString(int_aux));
+		
+		dataMap2.put("Pedidos", dataMap3);
+		dataMap1.put(verificacao_loja, dataMap2);
+		dataMap0.put("Lojas", dataMap1);
+		
+		firebase.put(dataMap0);
 	}
 }
