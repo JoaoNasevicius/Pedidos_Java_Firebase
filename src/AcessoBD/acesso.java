@@ -177,7 +177,7 @@ public class acesso {
 		firebase.put(dataMap0);
 	}
 	
-	public static void criarCadastro(String restaurante,String senha,String descricao,String email, String cor) throws UnsupportedEncodingException, JacksonUtilityException, FirebaseException {
+	public static void criarCadastro(String restaurante,String senha,String descricao,String email, String url_img, String cor) throws UnsupportedEncodingException, JacksonUtilityException, FirebaseException {
 		dataMap1 = new LinkedHashMap<String, Object>();
 		dataMap2 =  new LinkedHashMap<String, Object>();
 		dataMap3 =  new LinkedHashMap<String, Object>();
@@ -193,6 +193,7 @@ public class acesso {
 		dataMap2.put("Descricao", descricao);
 		dataMap2.put("Email", email);
 		dataMap2.put("Cor", cor);
+		dataMap2.put("URL", url_img);
 		dataMap1.put(restaurante, dataMap2);
 		dataMap0.put("Restaurantes", dataMap1);
 		
