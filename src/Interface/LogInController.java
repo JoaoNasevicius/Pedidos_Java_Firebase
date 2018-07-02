@@ -1,7 +1,9 @@
 package Interface;
 
 import AcessoBD.acesso;
+import AcessoBD.verificacao;
 import Firebase.FirebaseException;
+import Firebase.JacksonUtilityException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,19 +25,33 @@ import java.util.ResourceBundle;
 public class LogInController implements Initializable {
 
     acesso meuBd = new acesso();
+    verificacao tNovoPedido = new verificacao();
+
 
     @FXML TextField restauranteName;
     @FXML PasswordField senhaUsuario;
 
+    /**
+     * Construter da classe
+     * @throws FirebaseException
+     */
     public LogInController() throws FirebaseException {
     }
 
-
+    /**
+     * Inicializa junto com o Controller
+     * @param url
+     * @param rb
+     */
     public void initialize(URL url, ResourceBundle rb){
 
     }
 
-
+    /**
+     * Para ir na pagina de Login
+     * @param event
+     * @throws IOException
+     */
     public void handleGoToSingUp(javafx.event.ActionEvent event) throws IOException {
         System.out.println("Go to Login");
         Parent singUpPage = FXMLLoader.load(getClass().getResource("singUp.fxml"));
@@ -47,10 +63,14 @@ public class LogInController implements Initializable {
         app_stage.show();
     }
 
-
-    public void handleGoToMenu(javafx.event.ActionEvent event) throws IOException, FirebaseException {
-
-
+    /**
+     * Vai para Tela de Menu quando faz login
+     * @param event
+     * @throws IOException
+     * @throws FirebaseException
+     * @throws JacksonUtilityException
+     */
+    public void handleGoToMenu(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
 
         String senha = this.senhaUsuario.getText();
         String login = this.restauranteName.getText();
@@ -65,6 +85,10 @@ public class LogInController implements Initializable {
                     FileWriter W = new FileWriter(file);
                     W.write(login);
                     W.close();
+
+
+                    //tNovoPedido.run(login);
+
 
                     System.out.println("Go to Menu");
                     Parent loginPage = FXMLLoader.load(getClass().getResource("pedidos.fxml"));
@@ -82,6 +106,12 @@ public class LogInController implements Initializable {
             }else{//usuario não cadastrado no banco, retorna erro
 
                 System.out.println("Usuaria não cadastrado no sistema");
+                Parent erroPage = FXMLLoader.load(getClass().getResource("paginasDeErro/erroLogin.fxml"));
+                Scene loginScene = new Scene(erroPage);
+                Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                app_stage.hide();
+                app_stage.setScene(loginScene);
+                app_stage.show();
             }
         }else{ //se falto digitar senha ou login da mensagem de erro
 

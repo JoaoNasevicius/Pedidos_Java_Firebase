@@ -8,6 +8,8 @@ import Firebase.Firebase;
 import Firebase.FirebaseException;
 import Firebase.FirebaseResponse;
 import Firebase.JacksonUtilityException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 public class verificacao extends Thread{
 	static Firebase firebase;
@@ -17,7 +19,9 @@ public class verificacao extends Thread{
 	static Map<String, Object> dataMap1 = new LinkedHashMap<String, Object>();
 	static Map<String, Object> dataMap2 = new LinkedHashMap<String, Object>();
 	static Map<String, Object> dataMap3 = new LinkedHashMap<String, Object>();
-	
+
+
+
 	public void run(String restaurante) throws FirebaseException, UnsupportedEncodingException, JacksonUtilityException {
 		String verificacao_loja = null;
 		
@@ -25,7 +29,7 @@ public class verificacao extends Thread{
 			int i = 0;
 			acesso pedidos = new acesso();
 			firebase = new Firebase("https://projetoteste-9d563.firebaseio.com/");
-			
+
 			System.out.println("VERIFICA PEDIDO");
 			firebase = new Firebase("https://projetoteste-9d563.firebaseio.com/");
 			response = firebase.get();
@@ -46,8 +50,13 @@ public class verificacao extends Thread{
 			System.out.println();
 			if((Integer)dataMap3.get("Flag") == 1) {
 				//
-				
-				
+
+				Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Novo pedido", ButtonType.CLOSE);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.CLOSE) {
+					alert.close();
+				}
 				System.out.println("AVISO!");
 				
 				

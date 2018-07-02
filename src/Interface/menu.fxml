@@ -28,7 +28,6 @@
             </Label>
             <Button layoutX="14.0" layoutY="61.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" style="-fx-background-color: #f11123;" text="Menu" />
             <Button layoutX="14.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleGoPedidos" prefHeight="26.0" prefWidth="130.0" text="Pedidos" />
-            <Button layoutX="14.0" layoutY="161.0" mnemonicParsing="false" onAction="#handleGoAddConfig" prefHeight="26.0" prefWidth="130.0" text="Configuraçoes" />
             <Button layoutX="28.0" layoutY="535.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="130.0" text="Sair" />
          </children>
       </Pane>

@@ -23,6 +23,11 @@ public class addProductConroller {
     acesso meuBD = new acesso();
     String userName = "";
 
+    /**
+     * Constructor da classe que pega nome de usuario no arquivo salvo e acessa o banco de dados
+     * @throws IOException
+     * @throws FirebaseException
+     */
     public addProductConroller() throws IOException, FirebaseException {
         System.out.println("Acessa nome de usuario");
         BufferedReader br = null;
@@ -48,6 +53,13 @@ public class addProductConroller {
     @FXML TextField ingredientesProduct;
     @FXML TextField novoProduto;
 
+    /**
+     * Pega as informações do novo item do menu e adiciona no banco de dados
+     * @param event
+     * @throws IOException
+     * @throws FirebaseException
+     * @throws JacksonUtilityException
+     */
     @FXML
     private void addItem(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
 

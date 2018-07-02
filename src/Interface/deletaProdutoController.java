@@ -22,6 +22,14 @@ public class deletaProdutoController {
 
     @FXML  TextField productName;
     String userName = "";
+
+    /**
+     * Chamada quando clica para deletar um item do menu
+     * @param event
+     * @throws IOException
+     * @throws FirebaseException
+     * @throws JacksonUtilityException
+     */
     public void deletaProduto(javafx.event.ActionEvent event) throws IOException, FirebaseException, JacksonUtilityException {
     	acesso meuBD = new acesso();
     	

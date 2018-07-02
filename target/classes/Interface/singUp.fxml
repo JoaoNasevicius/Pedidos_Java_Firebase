@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -45,11 +46,17 @@
          </font>
       </Label>
       <TextField fx:id="dadosRestaurante" layoutX="153.0" layoutY="501.0" prefHeight="26.0" prefWidth="358.0" />
-      <Label layoutX="153.0" layoutY="539.0" prefHeight="16.0" prefWidth="210.0" text="Logo Restaurante">
+      <Label layoutX="153.0" layoutY="539.0" prefHeight="16.0" prefWidth="210.0" text="URL Logo">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Button layoutX="153.0" layoutY="586.0" mnemonicParsing="false" onAction="#escolheLogo" text="Logo" />
+      <ColorPicker fx:id="corRestaurante" layoutX="363.0" layoutY="586.0" prefHeight="25.0" prefWidth="150.0" />
+      <Label layoutX="363.0" layoutY="539.0" prefHeight="16.0" prefWidth="210.0" text="Cor">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <TextField fx:id="urlLogo" layoutX="153.0" layoutY="586.0" prefHeight="26.0" prefWidth="158.0" />
    </children>
 </AnchorPane>

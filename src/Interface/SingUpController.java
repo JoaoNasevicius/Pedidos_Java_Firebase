@@ -8,7 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -32,15 +34,21 @@ public class SingUpController {
 
     private File logo;
 
-    @FXML
-    TextField nomeRestaurante;
+    @FXML private TextField nomeRestaurante;
     @FXML private TextField userName;
     @FXML private TextField shoppingLocalizacao;
     @FXML private TextField senhaRestaurante;
     @FXML private TextField dadosRestaurante;
+    @FXML private TextField urlLogo;
+    @FXML private ColorPicker corRestaurante;
 
+    /**
+     * Go back to login page
+     * @param event information about the panel
+     * @throws IOException
+     */
     public void handleGoToLogin(javafx.event.ActionEvent event) throws IOException {
-        System.out.println("Go to Login");
+        System.out.println("Abre tela para adicionar produto");
         Parent loginPage = FXMLLoader.load(getClass().getResource("LogIn.fxml"));
         Scene loginScene = new Scene(loginPage);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -49,6 +57,13 @@ public class SingUpController {
         app_stage.show();
     }
 
+    /**
+     * Function to handle when click in the Button to create new Login
+     * @param event information about the panel
+     * @throws IOException
+     * @throws JacksonUtilityException
+     * @throws FirebaseException
+     */
     public void hangleGoMenu(javafx.event.ActionEvent event) throws IOException, JacksonUtilityException, FirebaseException {
         System.out.println("Novo usuario cadastrado");
 
@@ -58,10 +73,11 @@ public class SingUpController {
         String email = userName.getText();
         String praca = shoppingLocalizacao.getText();
         String senha = senhaRestaurante.getText();
-        String[] dados = dadosRestaurante.getText().split(",");
+        String dados = dadosRestaurante.getText();
+        String url = urlLogo.getText();
+        String cor = corRestaurante.getValue().toString();
 
-
-        meuBD.criarCadastro(nome, senha, dados[0], email, dados[1]);
+        meuBD.criarCadastro(nome, senha, dados, email, url, cor);
         meuBD.criaMenu(nome);
 
         //salva nome restaurante
@@ -71,7 +87,7 @@ public class SingUpController {
         W.close();
 
 
-
+        //vai para pagina de pedidos
         Parent loginPage = FXMLLoader.load(getClass().getResource("pedidos.fxml"));
         Scene loginScene = new Scene(loginPage);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -81,19 +97,5 @@ public class SingUpController {
 
     }
 
-    public void escolheLogo(javafx.event.ActionEvent event){
 
-        FileChooser logoFile = new FileChooser();
-        logoFile.setTitle("Escolha o logo logo");
-        this.logo= logoFile.showOpenDialog(null);
-
-        String extension = "";
-        int i = this.logo.getPath().lastIndexOf('.');
-        if (i > 0) {
-            extension = this.logo.getPath().substring(i+1);
-            if (extension.equals("png")){
-                System.out.println("Formato Correto de Image  Inserrida, parabéns filhos");
-            }
-        }
-    }
 }
